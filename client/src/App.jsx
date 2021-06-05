@@ -1,19 +1,16 @@
 import React from 'react';
 import { Typography, AppBar } from '@material-ui/core';
-import {makeStyles} from '@material-ui/core/styles'
+import useStyles from './AppStyles'
 
 import VideoPlayer from './components/VideoPlayer';
 import Options from './components/Options';
 import Notifications from './components/Notifications';
 
-const useStyles = makeStyles(theme => ({		// remember to wrap the object with parentheses to return it
-
-}))
-
 const App = () => {
+	const classes = useStyles;
 	return (
-		<div>
-			<AppBar position='static' color='inherit'>
+		<div className={classes.wrapper}>
+			<AppBar className={classes.appBar} position='static' color='inherit'>
 				<Typography variant='h2' align='center'>
 					Socket Chat
 				</Typography>
