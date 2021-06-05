@@ -7,7 +7,7 @@ import Options from './components/Options';
 import Notifications from './components/Notifications';
 
 const App = () => {
-	const classes = useStyles;
+	const classes = useStyles();
 	return (
 		<div className={classes.wrapper}>
 			<AppBar className={classes.appBar} position='static' color='inherit'>
