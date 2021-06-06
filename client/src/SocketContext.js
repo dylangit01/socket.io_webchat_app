@@ -21,6 +21,7 @@ export const ContextProvider = ({ children }) => {
 
 	useEffect(() => {
 		// First part is about when it comes to request permissions from the user
+
 		navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then((currentStream) => {
 			setStream(currentStream);
 			myVideo.current.srcObject = currentStream;
@@ -29,7 +30,7 @@ export const ContextProvider = ({ children }) => {
 
 		// Seconde part is to use socket.on to listen for specific action from the server
 
-		// Receive 'me' action with id, and set id to state "me"
+		// Receive server 'connection' with 'me' action and id, and set id to state "me"
 		socket.on('me', (id) => setMe(id));
 
 		// Listen to the callUser's call action
