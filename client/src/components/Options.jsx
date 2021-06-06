@@ -54,13 +54,15 @@ const Options = ({ children }) => {
 									fullWidth
 									onClick={() => callUser(idToCall)}
 									className={classes.margin}
-								>Call</Button>
+								>
+									Call
+								</Button>
 							)}
 						</Grid>
 					</Grid>
+					{children}
 				</form>
 			</Paper>
-			{children}
 		</Container>
 	);
 };
