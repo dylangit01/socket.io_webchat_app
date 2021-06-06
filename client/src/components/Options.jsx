@@ -7,7 +7,7 @@ import { Assignment, Phone, PhoneDisabled } from '@material-ui/icons';
 import { SocketContext } from '../SocketContext';
 
 const Options = ({ children }) => {
-	const [idToCall, setIdToCall] = useState(SocketContext);
+	const [idToCall, setIdToCall] = useState('');
 
 	const classes = useStyles();
 	const { me, callAccepted, name, setName, callEnded, leaveCall, callUser } = useContext(SocketContext);
@@ -33,7 +33,7 @@ const Options = ({ children }) => {
 							<Typography variant='h6' gutterBottom>
 								Make a Call
 							</Typography>
-							<TextField label='ID to Call' value={idToCall} onChange={(e) => setIdToCall(e.target.value)} fullWidth />
+							<TextField label='ID to call' value={idToCall} onChange={(e) => setIdToCall(e.target.value)} fullWidth />
 
 							{callAccepted && !callEnded ? (
 								<Button
@@ -54,7 +54,7 @@ const Options = ({ children }) => {
 									fullWidth
 									onClick={() => callUser(idToCall)}
 									className={classes.margin}
-								></Button>
+								>Call</Button>
 							)}
 						</Grid>
 					</Grid>
