@@ -22,6 +22,7 @@ const Options = ({ children }) => {
 								Account Info
 							</Typography>
 							<TextField label='Name' value={name} onChange={(e) => setName(e.target.value)} fullWidth />
+							{console.log(me)}
 							<CopyToClipboard text={me} className={classes.margin}>
 								<Button variant='contained' color='primary' fullWidth startIcon={<Assignment fontSize='large' />}>
 									Copy Your ID

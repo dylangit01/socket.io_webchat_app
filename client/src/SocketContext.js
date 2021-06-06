@@ -8,7 +8,7 @@ export const SocketContext = createContext();
 const socket = io('http://localhost:5000');
 
 export const ContextProvider = ({ children }) => {
-	const [stream, setStream] = useState(null);
+	const [stream, setStream] = useState();
 	const [me, setMe] = useState('');
 	const [call, setCall] = useState({});
 	const [callAccepted, setCallAccepted] = useState(false);
@@ -21,19 +21,20 @@ export const ContextProvider = ({ children }) => {
 
 	useEffect(() => {
 		// First part is about when it comes to request permissions from the user
-		navigator.mediaDevices.getUserMedia({ video: true, audio: true })
-			.then((currentStream) => {
+		navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then((currentStream) => {
 			setStream(currentStream);
 			myVideo.current.srcObject = currentStream;
 			// with the useRef, not only set the currentSteam to the state, but also populate video iframe once includes it in the code.
+		});
 
-			// Seconde part is to use socket.on to listen for specific action from the server
-			socket.on('me', (id) => setMe(id));
+		// Seconde part is to use socket.on to listen for specific action from the server
 
-			// Listen to the callUser's call action
-			socket.on('callUser', ({ from, name: callerName, signal }) => {
-				setCall({ isReceivedCall: true, from, name: callerName, signal });
-			});
+		// Receive 'me' action with id, and set id to state "me"
+		socket.on('me', (id) => setMe(id));
+
+		// Listen to the callUser's call action
+		socket.on('callUser', ({ from, name: callerName, signal }) => {
+			setCall({ isReceivedCall: true, from, name: callerName, signal });
 		});
 	}, []);
 

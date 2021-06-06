@@ -6,15 +6,16 @@ const cors = require('cors');
 const io = require('socket.io')(server, {
 	cors: {
 		origin: '*',
-		method: ['GET', 'POST'],
+		methods: ['GET', 'POST'],
 	},
 });
+
 
 app.use(cors());
 app.use(express.json());
 
 app.get('/', (req, res) => {
-	res.send('Server is running');
+	res.send('Server is running???');
 });
 
 // Build up io connection
@@ -25,8 +26,8 @@ io.on('connection', (socket) => {
 		socket.broadcast.emit('callEnded');
 	});
 
-	socket.on('callUser', ({ userToCall, signalData, form, name }) => {
-		io.to(userToCall).emit('callUser', { signal: signalData, form, name });
+	socket.on('callUser', ({ userToCall, signalData, from, name }) => {
+		io.to(userToCall).emit('callUser', { signal: signalData, from, name });
 	});
 
 	socket.on('answerCall', (data) => {
@@ -35,6 +36,6 @@ io.on('connection', (socket) => {
 });
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
+server.listen(PORT, () => {
 	console.log(`App listening on port ${PORT}!`);
 });
