@@ -21,7 +21,8 @@ export const ContextProvider = ({ children }) => {
 
 	useEffect(() => {
 		// First part is about when it comes to request permissions from the user
-		navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then((currentStream) => {
+		navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+			.then((currentStream) => {
 			setStream(currentStream);
 			myVideo.current.srcObject = currentStream;
 			// with the useRef, not only set the currentSteam to the state, but also populate video iframe once includes it in the code.
